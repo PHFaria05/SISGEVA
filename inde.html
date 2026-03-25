@@ -8,17 +8,28 @@
 <body>
 
   <!-- LOGIN -->
-  <div id="loginScreen">
+  <section id="loginScreen" class="screen">
     <h2>SISGEVA - Login</h2>
     <input type="text" id="user" placeholder="Usuário">
     <input type="password" id="pass" placeholder="Senha">
     <button onclick="login()">Entrar</button>
-  </div>
+  </section>
 
   <!-- DASHBOARD -->
-  <div id="mainScreen" style="display:none;">
+  <section id="mainScreen" class="screen hidden">
     <h2>Painel SISGEVA</h2>
-    <p>Sistema de Gerenciamento de Vacinas</p>
+
+    <button onclick="abrirModal()">Cadastrar Paciente</button>
+  </section>
+
+  <!-- MODAL -->
+  <div id="modalPaciente" class="modal hidden">
+    <div class="modal-content">
+      <h3>Novo Paciente</h3>
+      <input type="text" id="nomePaciente" placeholder="Nome do paciente">
+      <button onclick="salvarPaciente()">Salvar</button>
+      <button onclick="fecharModal()">Fechar</button>
+    </div>
   </div>
 
   <script src="script.js"></script>
