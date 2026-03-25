@@ -30,9 +30,21 @@ function salvarPaciente() {
 
   pacientes.push(nome);
 
-  console.log(pacientes);
-
-  alert("Paciente salvo!");
+  atualizarLista();
 
   document.getElementById("nomePaciente").value = "";
+
+  alert("Paciente salvo!");
+}
+
+function atualizarLista() {
+  const lista = document.getElementById("listaPacientes");
+
+  lista.innerHTML = "";
+
+  for (let i = 0; i < pacientes.length; i++) {
+    const li = document.createElement("li");
+    li.textContent = pacientes[i];
+    lista.appendChild(li);
+  }
 }
