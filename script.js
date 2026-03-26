@@ -48,19 +48,40 @@ function atualizarLista() {
 
     li.textContent = pacientes[i] + " ";
 
-    const btn = document.createElement("button");
-    btn.textContent = "Excluir";
+    // BOTÃO EDITAR
+    const btnEditar = document.createElement("button");
+    btnEditar.textContent = "Editar";
+    btnEditar.onclick = function () {
+      editarPaciente(i);
+    };
 
-    btn.onclick = function () {
+    // BOTÃO EXCLUIR
+    const btnExcluir = document.createElement("button");
+    btnExcluir.textContent = "Excluir";
+    btnExcluir.onclick = function () {
       excluirPaciente(i);
     };
 
-    li.appendChild(btn);
+    li.appendChild(btnEditar);
+    li.appendChild(btnExcluir);
+
     lista.appendChild(li);
   }
 }
 
 function excluirPaciente(index) {
   pacientes.splice(index, 1);
+  atualizarLista();
+}
+
+function editarPaciente(index) {
+  const novoNome = prompt("Digite o novo nome:", pacientes[index]);
+
+  if (novoNome === null || novoNome === "") {
+    return;
+  }
+
+  pacientes[index] = novoNome;
+
   atualizarLista();
 }
