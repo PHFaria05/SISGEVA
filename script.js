@@ -37,6 +37,7 @@ function salvarPaciente() {
   alert("Paciente salvo!");
 }
 
+// Excluir paciente (Aqui eu tive bastante dificuladade, entender essa paradas do array, mas pesquisei e o copilot me ajudou.)
 function atualizarLista() {
   const lista = document.getElementById("listaPacientes");
 
@@ -44,7 +45,22 @@ function atualizarLista() {
 
   for (let i = 0; i < pacientes.length; i++) {
     const li = document.createElement("li");
-    li.textContent = pacientes[i];
+
+    li.textContent = pacientes[i] + " ";
+
+    const btn = document.createElement("button");
+    btn.textContent = "Excluir";
+
+    btn.onclick = function () {
+      excluirPaciente(i);
+    };
+
+    li.appendChild(btn);
     lista.appendChild(li);
   }
+}
+
+function excluirPaciente(index) {
+  pacientes.splice(index, 1);
+  atualizarLista();
 }
