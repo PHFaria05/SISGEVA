@@ -30,14 +30,16 @@ function salvarPaciente() {
 
   pacientes.push(nome);
 
+  salvarNoLocalStorage();
   atualizarLista();
 
   document.getElementById("nomePaciente").value = "";
+  fecharModal();
 
   alert("Paciente salvo!");
 }
 
-// Excluir paciente (Aqui eu tive bastante dificuladade, entender essa paradas do array, mas pesquisei e o copilot me ajudou.)
+//Aqui foi trabalho
 function atualizarLista() {
   const lista = document.getElementById("listaPacientes");
 
@@ -71,6 +73,7 @@ function atualizarLista() {
 
 function excluirPaciente(index) {
   pacientes.splice(index, 1);
+  salvarNoLocalStorage();
   atualizarLista();
 }
 
@@ -82,6 +85,21 @@ function editarPaciente(index) {
   }
 
   pacientes[index] = novoNome;
-
+  salvarNoLocalStorage();
   atualizarLista();
 }
+
+function salvarNoLocalStorage() {
+  localStorage.setItem("pacientes", JSON.stringify(pacientes));
+}
+
+function carregarPacientes() {
+  const dados = localStorage.getItem("pacientes");
+
+  if (dados) {
+    pacientes = JSON.parse(dados);
+    atualizarLista();
+  }
+}
+
+carregarPacientes();
