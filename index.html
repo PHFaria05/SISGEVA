@@ -3,37 +3,40 @@
 <head>
   <meta charset="UTF-8">
   <title>SISGEVA</title>
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
 
+  <h1>SISGEVA</h1>
+
   <!-- LOGIN -->
-  <section id="loginScreen" class="screen">
-    <h2>SISGEVA - Login</h2>
+  <div id="login">
+    <h2>Login</h2>
     <input type="text" id="user" placeholder="Usuário">
     <input type="password" id="pass" placeholder="Senha">
     <button onclick="login()">Entrar</button>
-  </section>
-
-  <!-- DASHBOARD -->
-  <section id="mainScreen" class="screen hidden">
-    <h2>Painel SISGEVA</h2>
-    <h3>Pacientes cadastrados</h3>
-    <ul id="listaPacientes"></ul>
-
-    <button onclick="abrirModal()">Cadastrar Paciente</button>
-  </section>
-
-  <!-- MODAL -->
-  <div id="modalPaciente" class="modal hidden">
-    <div class="modal-content">
-      <h3>Novo Paciente</h3>
-      <input type="text" id="nomePaciente" placeholder="Nome do paciente">
-      <button onclick="salvarPaciente()">Salvar</button>
-      <button onclick="fecharModal()">Fechar</button>
-    </div>
   </div>
 
-  <script src="script.js"></script>
+  <!-- SISTEMA -->
+  <div id="sistema" style="display:none;">
+    <h2>Cadastro de Paciente</h2>
+
+    <input type="text" id="nome" placeholder="Nome">
+    <input type="number" id="idade" placeholder="Idade">
+    <button onclick="cadastrarPaciente()">Cadastrar</button>
+
+    <h3>Pacientes</h3>
+    <ul id="listaPacientes"></ul>
+  </div>
+
+  <script src="js/storage.js"></script>
+  <script src="js/auth.js"></script>
+  <script src="js/pacientes.js"></script>
+  <script src="js/vacinas.js"></script>
+
+  <script>
+    initStorage();
+  </script>
+
 </body>
 </html>
