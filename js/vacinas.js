@@ -1,14 +1,4 @@
-function registrarVacina(pacienteId, nomeVacina) {
-  const vacina = {
-    id: Date.now(),
-    pacienteId: pacienteId,
-    nome: nomeVacina,
-    data: new Date().toLocaleDateString()
-  };
-
-  saveVacina(vacina);
-}
-
+// Vai pegar do select
 function carregarPacientesSelect() {
   const select = document.getElementById("pacienteSelect");
   select.innerHTML = "";
@@ -23,12 +13,15 @@ function carregarPacientesSelect() {
   });
 }
 
+// REGISTRAR VACINA (Versão 2.0 hehehe)
 function aplicarVacina() {
   const pacienteId = document.getElementById("pacienteSelect").value;
   const nomeVacina = document.getElementById("vacinaNome").value;
+  const dose = document.getElementById("dose").value;
+  const profissional = document.getElementById("profissional").value;
 
-  if (!nomeVacina) {
-    alert("Digite o nome da vacina");
+  if (!nomeVacina || !dose || !profissional) {
+    alert("Preencha todos os campos");
     return;
   }
 
@@ -36,6 +29,8 @@ function aplicarVacina() {
     id: Date.now(),
     pacienteId: Number(pacienteId),
     nome: nomeVacina,
+    dose: dose,
+    profissional: profissional,
     data: new Date().toLocaleDateString()
   };
 
@@ -44,4 +39,8 @@ function aplicarVacina() {
   alert("Vacina registrada!");
 
   document.getElementById("vacinaNome").value = "";
+  document.getElementById("dose").value = "";
+  document.getElementById("profissional").value = "";
+
+  carregarPacientesSelect();
 }

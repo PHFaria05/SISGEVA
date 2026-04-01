@@ -17,9 +17,10 @@ function cadastrarPaciente() {
 
   limparCampos();
   listarPacientes();
+  carregarPacientesSelect();
 }
 
-// LISTAR
+// Listagm
 function listarPacientes() {
   const lista = document.getElementById("listaPacientes");
   lista.innerHTML = "";
@@ -33,6 +34,7 @@ function listarPacientes() {
 
     li.innerHTML = `
       ${p.nome} - ${p.idade} anos
+      <button onclick="verVacinas(${p.id})">Ver Vacinas</button>
       <button onclick="editarPaciente(${p.id})">Editar</button>
       <button onclick="removerPaciente(${p.id})">Excluir</button>
     `;
@@ -41,7 +43,7 @@ function listarPacientes() {
   });
 }
 
-// EDITAR
+// Mudar dados do paciente
 function editarPaciente(id) {
   const pacientes = getPacientes();
   const paciente = pacientes.find(p => p.id === id);
@@ -52,7 +54,7 @@ function editarPaciente(id) {
   removerPaciente(id);
 }
 
-// REMOVER
+// Remove
 function removerPaciente(id) {
   let pacientes = getPacientes();
   pacientes = pacientes.filter(p => p.id !== id);
@@ -61,8 +63,26 @@ function removerPaciente(id) {
   listarPacientes();
 }
 
-// LIMPAR CAMPOS
+// Limpar
 function limparCampos() {
   document.getElementById("nome").value = "";
   document.getElementById("idade").value = "";
+}
+
+function verVacinas(pacienteId) {
+  const vacinas = getVacinas();
+  const lista = vacinas.filter(v => v.pacienteId === pacienteId);
+
+  let mensagem = "Histórico de Vacinas:\n\n";
+
+  if (lista.length === 0) {
+    mensagem += "Nenhuma vacina registrada.";
+  } else {
+    lista.forEach(v => {
+      mensagem += `• ${v.nome} (${v.dose}) - ${v.data}\n`;
+      mensagem += `  Profissional: ${v.profissional}\n\n`;
+    });
+  }
+
+  alert(mensagem);
 }
