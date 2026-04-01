@@ -1,0 +1,58 @@
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f4f6f8;
+  margin: 0;
+  padding: 20px;
+}
+
+h1 {
+  text-align: center;
+}
+
+#login, #sistema {
+  max-width: 500px;
+  margin: auto;
+  background: white;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+
+input {
+  width: 100%;
+  padding: 10px;
+  margin: 5px 0;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+button {
+  margin-top: 5px;
+  padding: 8px 12px;
+  border: none;
+  background-color: #2d89ef;
+  color: white;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #1b5fa7;
+}
+
+li {
+  margin: 10px 0;
+  list-style: none;
+  padding: 10px;
+  background: #eef2f5;
+  border-radius: 5px;
+}
+
+li button {
+  margin-left: 10px;
+  background-color: #555;
+}
+
+li button:hover {
+  background-color: #333;
+}
