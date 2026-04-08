@@ -13,9 +13,17 @@ function carregarPacientesSelect() {
   });
 }
 
-// REGISTRAR VACINA (Versão 2.0 hehehe)
+// Registro de vacinas
 function aplicarVacina() {
-  const pacienteId = document.getElementById("pacienteSelect").value;
+  const select = document.getElementById("pacienteSelect");
+
+  // Proteção, estava dando problema no registro de vacinas. 
+  if (!select || !select.value) {
+    alert("Selecione um paciente");
+    return;
+  }
+
+  const pacienteId = select.value;
   const nomeVacina = document.getElementById("vacinaNome").value;
   const dose = document.getElementById("dose").value;
   const profissional = document.getElementById("profissional").value;
@@ -41,6 +49,4 @@ function aplicarVacina() {
   document.getElementById("vacinaNome").value = "";
   document.getElementById("dose").value = "";
   document.getElementById("profissional").value = "";
-
-  carregarPacientesSelect();
 }
