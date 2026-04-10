@@ -50,3 +50,21 @@ function aplicarVacina() {
   document.getElementById("dose").value = "";
   document.getElementById("profissional").value = "";
 }
+
+function editarVacina(vacinaId, novoNome, novaData) {
+  const vacinas = getVacinas();
+
+  const index = vacinas.findIndex(v => v.id === vacinaId);
+
+  if (index === -1) {
+    alert("Vacina não encontrada");
+    return;
+  }
+
+  vacinas[index].nome = novoNome;
+  vacinas[index].data = novaData;
+
+  salvarVacinas(vacinas);
+
+  alert("Vacina editada com sucesso!");
+}
