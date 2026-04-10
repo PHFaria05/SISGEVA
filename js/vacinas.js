@@ -96,6 +96,6 @@ function abrirEdicaoVacina(vacinaId) {
 
   alert("Vacina atualizada!");
 
-  // 🔥 recarrega a lista
+  // recarrega a lista
   verVacinas(vacina.pacienteId);
 }

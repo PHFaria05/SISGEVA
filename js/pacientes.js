@@ -34,7 +34,7 @@ function listarPacientes() {
 
     li.innerHTML = `
       ${p.nome} - ${p.idade} anos
-      <button onclick="verVacinas(${p.id})">Ver Vacinas</button>
+      <button onclick="irParaVacinas(${p.id})">Ver Vacinas</button>
       <button onclick="editarPaciente(${p.id})">Editar</button>
       <button onclick="removerPaciente(${p.id})">Excluir</button>
     `;
@@ -91,7 +91,7 @@ function verVacinas(pacienteId) {
       <br>Profissional: ${v.profissional}
     `;
 
-    // 🔥 BOTÃO EDITAR
+    // BOTÃO EDITAR
     const botaoEditar = document.createElement("button");
     botaoEditar.textContent = "Editar";
 
