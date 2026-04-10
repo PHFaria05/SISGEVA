@@ -29,3 +29,7 @@ function saveVacina(vacina) {
   vacinas.push(vacina);
   localStorage.setItem("vacinas", JSON.stringify(vacinas));
 }
+
+function salvarVacinas(vacinas) {
+  localStorage.setItem("vacinas", JSON.stringify(vacinas));
+}

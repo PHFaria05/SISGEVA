@@ -51,6 +51,7 @@ function aplicarVacina() {
   document.getElementById("profissional").value = "";
 }
 
+// Editar as vacinas refistradas
 function editarVacina(vacinaId, novoNome, novaData) {
   const vacinas = getVacinas();
 
@@ -67,4 +68,34 @@ function editarVacina(vacinaId, novoNome, novaData) {
   salvarVacinas(vacinas);
 
   alert("Vacina editada com sucesso!");
+}
+
+function abrirEdicaoVacina(vacinaId) {
+  const vacinas = getVacinas();
+  const vacina = vacinas.find(v => v.id === vacinaId);
+
+  if (!vacina) {
+    alert("Vacina não encontrada");
+    return;
+  }
+
+  const novoNome = prompt("Novo nome:", vacina.nome);
+  const novaDose = prompt("Nova dose:", vacina.dose);
+  const novoProfissional = prompt("Novo profissional:", vacina.profissional);
+
+  if (!novoNome || !novaDose || !novoProfissional) {
+    alert("Edição cancelada");
+    return;
+  }
+
+  vacina.nome = novoNome;
+  vacina.dose = novaDose;
+  vacina.profissional = novoProfissional;
+
+  salvarVacinas(vacinas);
+
+  alert("Vacina atualizada!");
+
+  // 🔥 recarrega a lista
+  verVacinas(vacina.pacienteId);
 }

@@ -73,16 +73,33 @@ function verVacinas(pacienteId) {
   const vacinas = getVacinas();
   const lista = vacinas.filter(v => v.pacienteId === pacienteId);
 
-  let mensagem = "Histórico de Vacinas:\n\n";
+  const container = document.getElementById("areaVacinas");
+  container.innerHTML = "";
 
   if (lista.length === 0) {
-    mensagem += "Nenhuma vacina registrada.";
-  } else {
-    lista.forEach(v => {
-      mensagem += `• ${v.nome} (${v.dose}) - ${v.data}\n`;
-      mensagem += `  Profissional: ${v.profissional}\n\n`;
-    });
+    container.innerHTML = "<p>Nenhuma vacina registrada.</p>";
+    return;
   }
 
-  alert(mensagem);
+  const ul = document.createElement("ul");
+
+  lista.forEach(v => {
+    const li = document.createElement("li");
+
+    li.innerHTML = `
+      ${v.nome} (${v.dose}) - ${v.data}
+      <br>Profissional: ${v.profissional}
+    `;
+
+    // 🔥 BOTÃO EDITAR
+    const botaoEditar = document.createElement("button");
+    botaoEditar.textContent = "Editar";
+
+    botaoEditar.onclick = () => abrirEdicaoVacina(v.id);
+
+    li.appendChild(botaoEditar);
+    ul.appendChild(li);
+  });
+
+  container.appendChild(ul);
 }
