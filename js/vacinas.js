@@ -13,42 +13,41 @@ function carregarPacientesSelect() {
   });
 }
 
-// Registro de vacinas
+// Registro de vacinas 
 function aplicarVacina() {
   const select = document.getElementById("pacienteSelect");
 
   // Proteção, estava dando problema no registro de vacinas. 
   if (!select || !select.value) {
-    alert("Selecione um paciente");
-    return;
-  }
-
-  const pacienteId = select.value;
-  const nomeVacina = document.getElementById("vacinaNome").value;
-  const dose = document.getElementById("dose").value;
-  const profissional = document.getElementById("profissional").value;
-
-  if (!nomeVacina || !dose || !profissional) {
-    alert("Preencha todos os campos");
+    alert("Selecione um paciente.");
     return;
   }
 
   const vacina = {
     id: Date.now(),
-    pacienteId: Number(pacienteId),
-    nome: nomeVacina,
-    dose: dose,
-    profissional: profissional,
-    data: new Date().toLocaleDateString()
+    pacienteId: Number(select.value),
+    nome: document.getElementById("vacinaNome").value.trim(),
+    dose: document.getElementById("dose").value.trim(),
+    data: document.getElementById("dataVacina").value,
+    profissional: document.getElementById("profissional").value.trim(),
+    lote: document.getElementById("lote").value.trim(),
+    observacoes: document.getElementById("observacoes").value.trim()
   };
+
+  const erro = validarVacina(vacina);
+
+  if (erro) {
+    alert(erro);
+    return;
+  }
 
   saveVacina(vacina);
 
   alert("Vacina registrada!");
 
-  document.getElementById("vacinaNome").value = "";
-  document.getElementById("dose").value = "";
-  document.getElementById("profissional").value = "";
+  limparFormularioVacina();
+
+  verVacinas(vacina.pacienteId);
 }
 
 // Editar as vacinas refistradas
@@ -98,4 +97,44 @@ function abrirEdicaoVacina(vacinaId) {
 
   // recarrega a lista
   verVacinas(vacina.pacienteId);
+}
+
+function validarVacina(vacina) {
+  if (!vacina.nome) {
+    return "Informe o nome da vacina.";
+  }
+
+  if (!vacina.dose) {
+    return "Informe a dose.";
+  }
+
+  if (!vacina.data) {
+    return "Informe a data.";
+  }
+
+  if (!vacina.profissional) {
+    return "Informe o profissional.";
+  }
+
+  if (!vacina.lote) {
+    return "Informe o lote.";
+  }
+
+  const hoje = new Date();
+  const dataVacina = new Date(vacina.data);
+
+  if (dataVacina > hoje) {
+    return "A data não pode ser futura.";
+  }
+
+  return null;
+}
+
+function limparFormularioVacina() {
+  document.getElementById("vacinaNome").value = "";
+  document.getElementById("dose").value = "";
+  document.getElementById("dataVacina").value = "";
+  document.getElementById("profissional").value = "";
+  document.getElementById("lote").value = "";
+  document.getElementById("observacoes").value = "";
 }

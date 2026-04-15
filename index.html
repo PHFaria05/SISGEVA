@@ -45,11 +45,13 @@
     <div id="vacinas" class="tela">
       <h2>Vacinas</h2>
 
-      <select id="pacienteSelect" onchange="verVacinas(this.value)"></select>
-
+      <select id="pacienteSelect" onchange="verVacina(this.value)"></select>
       <input type="text" id="vacinaNome" placeholder="Nome da vacina">
-      <input type="text" id="dose" placeholder="Dose">
+      <input type="text" id="dose" placeholder="Dose (ex: 1ª dose)">
+      <input type="date" id="dataVacina">
       <input type="text" id="profissional" placeholder="Profissional">
+      <input type="text" id="lote" placeholder="Lote da vacina">
+      <textarea id="observacoes" placeholder="Observações (opcional)"></textarea>
 
       <button onclick="aplicarVacina()">Aplicar</button>
 
