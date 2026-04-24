@@ -1,107 +1,640 @@
+/* ============================================================
+   SISGEVA — style.css
+   Tema: Profissional corporativo (saúde pública)
+   Suporte: claro e escuro via data-theme no <html>
+   ============================================================ */
+
+/* ── 1. VARIÁVEIS DE TEMA ─────────────────────────────────── */
+
+:root,
+[data-theme="light"] {
+  /* Superfícies */
+  --bg-page:        #f0f4f8;
+  --bg-card:        #ffffff;
+  --bg-nav:         #ffffff;
+  --bg-header:      #ffffff;
+  --bg-input:       #f8fafc;
+  --bg-input-focus: #ffffff;
+
+  /* Cores primárias (azul-saúde) */
+  --color-primary:        #1a6fc4;
+  --color-primary-hover:  #155fa8;
+  --color-primary-light:  #e8f1fb;
+
+  /* Cores de destaque */
+  --color-danger:         #dc3545;
+  --color-danger-hover:   #bb2d3b;
+  --color-success:        #198754;
+
+  /* Textos */
+  --text-primary:   #0f1923;
+  --text-secondary: #4a5568;
+  --text-muted:     #8a9ab0;
+  --text-on-primary:#ffffff;
+
+  /* Bordas e sombras */
+  --border-color:   #d1dce8;
+  --border-radius:  10px;
+  --border-radius-lg: 16px;
+  --shadow-sm:      0 1px 3px rgba(0,0,0,.07), 0 1px 2px rgba(0,0,0,.05);
+  --shadow-md:      0 4px 16px rgba(0,0,0,.08), 0 1px 4px rgba(0,0,0,.05);
+  --shadow-focus:   0 0 0 3px rgba(26,111,196,.25);
+
+  /* Transição global */
+  --transition: .2s ease;
+}
+
+[data-theme="dark"] {
+  --bg-page:        #0d1117;
+  --bg-card:        #161b22;
+  --bg-nav:         #161b22;
+  --bg-header:      #161b22;
+  --bg-input:       #0d1117;
+  --bg-input-focus: #1c2230;
+
+  --color-primary:        #4d9fec;
+  --color-primary-hover:  #3a8fd8;
+  --color-primary-light:  #1a2a3a;
+
+  --color-danger:         #f87171;
+  --color-danger-hover:   #ef4444;
+  --color-success:        #4ade80;
+
+  --text-primary:   #e6edf3;
+  --text-secondary: #8b949e;
+  --text-muted:     #4d5b6a;
+  --text-on-primary:#ffffff;
+
+  --border-color:   #30363d;
+  --shadow-sm:      0 1px 3px rgba(0,0,0,.3);
+  --shadow-md:      0 4px 16px rgba(0,0,0,.4);
+  --shadow-focus:   0 0 0 3px rgba(77,159,236,.3);
+}
+
+/* ── 2. RESET E BASE ─────────────────────────────────────── */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-size: 16px;
+  -webkit-text-size-adjust: 100%;
+}
+
 body {
-  font-family: Arial, sans-serif;
-  background-color: #f4f6f8;
-  margin: 0;
-  padding: 20px;
+  font-family: 'DM Sans', system-ui, sans-serif;
+  background-color: var(--bg-page);
+  color: var(--text-primary);
+  line-height: 1.6;
+  min-height: 100vh;
+  transition: background-color var(--transition), color var(--transition);
 }
 
-h1 {
-  text-align: center;
-}
+/* ── 3. HEADER ───────────────────────────────────────────── */
 
-#login, #sistema {
-  max-width: 500px;
-  margin: auto;
-  background: white;
-  padding: 20px;
-  border-radius: 10px;
-  box-shadow: 0 0 10px rgba(0,0,0,0.1);
-}
-
-input {
-  width: 100%;
-  padding: 10px;
-  margin: 5px 0;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-}
-
-button {
-  margin-top: 5px;
-  padding: 8px 12px;
-  border: none;
-  background-color: #2d89ef;
-  color: white;
-  border-radius: 5px;
-  cursor: pointer;
-}
-
-button:hover {
-  background-color: #1b5fa7;
-}
-
-li {
-  margin: 10px 0;
-  list-style: none;
-  padding: 10px;
-  background: #eef2f5;
-  border-radius: 5px;
-}
-
-li button {
-  margin-left: 10px;
-  background-color: #555;
-}
-
-li button:hover {
-  background-color: #333;
-}
-
-.tela{
-  display: none;
-}
-
-body.dark{
-  background-color: #121212;
-  color: #f5f5f5;
-}
-
-body.dark .card{
-  background-color: #1e1e1e;
-  border: 1px solid #333;
-}
-
-header {
+.header {
   display: flex;
-  justify-content: space-between; /* título à esquerda, botão à direita */
   align-items: center;
-  padding: 10px 20px;
-  background-color: #f0f0f0;
+  justify-content: space-between;
+  padding: 0 2rem;
+  height: 68px;
+  background: var(--bg-header);
+  border-bottom: 1px solid var(--border-color);
+  box-shadow: var(--shadow-sm);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  transition: background var(--transition), border-color var(--transition);
 }
 
-header h1 {
-  margin: 0;
+.header-brand {
+  display: flex;
+  align-items: center;
+  gap: .75rem;
 }
 
-#theme-toggle {
-  padding: 8px 12px;
-  border: none;
-  border-radius: 6px;
+.header-icon {
+  font-size: 1.6rem;
+  line-height: 1;
+}
+
+.header-title {
+  font-size: 1.25rem;
+  font-weight: 600;
+  letter-spacing: .04em;
+  color: var(--color-primary);
+  line-height: 1.2;
+}
+
+.header-subtitle {
+  font-size: .72rem;
+  color: var(--text-muted);
+  font-family: 'DM Mono', monospace;
+  letter-spacing: .02em;
+}
+
+/* Botão de tema */
+.btn-theme {
+  background: var(--bg-input);
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  width: 42px;
+  height: 42px;
   cursor: pointer;
-  background-color: #ddd;
-  font-size: 18px;
+  font-size: 1.1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background var(--transition), border-color var(--transition), transform .15s;
 }
 
-body.dark {
-  background-color: #121212;
-  color: #f5f5f5;
+.btn-theme:hover {
+  background: var(--color-primary-light);
+  border-color: var(--color-primary);
+  transform: scale(1.08);
 }
 
-body.dark header {
-  background-color: #1e1e1e;
+/* Mostra ☀️ no escuro, 🌙 no claro */
+[data-theme="light"] .theme-icon-dark  { display: none; }
+[data-theme="dark"]  .theme-icon-light { display: none; }
+
+/* ── 4. LOGIN ────────────────────────────────────────────── */
+
+.login-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: calc(100vh - 68px);
+  padding: 2rem 1rem;
 }
 
-body.dark #theme-toggle {
-  background-color: #333;
-  color: #f5f5f5;
+.login-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: var(--border-radius-lg);
+  box-shadow: var(--shadow-md);
+  padding: 2.5rem 2rem;
+  width: 100%;
+  max-width: 420px;
+  animation: fadeUp .35s ease both;
+}
+
+.login-header {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.login-icon {
+  font-size: 2.4rem;
+  display: block;
+  margin-bottom: .75rem;
+}
+
+.login-title {
+  font-size: 1.4rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: .3rem;
+}
+
+.login-desc {
+  font-size: .875rem;
+  color: var(--text-muted);
+}
+
+.login-error {
+  color: var(--color-danger);
+  font-size: .85rem;
+  font-weight: 500;
+  min-height: 1.4rem;
+  margin-bottom: .5rem;
+}
+
+/* ── 5. NAVEGAÇÃO ────────────────────────────────────────── */
+
+.nav {
+  background: var(--bg-nav);
+  border-bottom: 1px solid var(--border-color);
+  box-shadow: var(--shadow-sm);
+  transition: background var(--transition);
+}
+
+.nav-inner {
+  display: flex;
+  align-items: center;
+  gap: .25rem;
+  padding: .5rem 1.5rem;
+  max-width: 1100px;
+  margin: 0 auto;
+  overflow-x: auto;
+}
+
+.nav-btn {
+  display: flex;
+  align-items: center;
+  gap: .4rem;
+  padding: .5rem 1rem;
+  border: none;
+  border-radius: 8px;
+  background: transparent;
+  color: var(--text-secondary);
+  font-family: 'DM Sans', sans-serif;
+  font-size: .875rem;
+  font-weight: 500;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background var(--transition), color var(--transition);
+}
+
+.nav-btn:hover {
+  background: var(--color-primary-light);
+  color: var(--color-primary);
+}
+
+.nav-btn.active {
+  background: var(--color-primary-light);
+  color: var(--color-primary);
+  font-weight: 600;
+}
+
+.nav-btn-logout {
+  margin-left: auto;
+  color: var(--color-danger);
+}
+
+.nav-btn-logout:hover {
+  background: #fff0f0;
+  color: var(--color-danger-hover);
+}
+
+[data-theme="dark"] .nav-btn-logout:hover {
+  background: #2a1a1a;
+}
+
+/* ── 6. CONTEÚDO PRINCIPAL ───────────────────────────────── */
+
+.content-wrapper {
+  max-width: 860px;
+  margin: 0 auto;
+  padding: 2rem 1.5rem 4rem;
+}
+
+/* ── 7. CABEÇALHO DE PÁGINA ──────────────────────────────── */
+
+.page-header {
+  margin-bottom: 1.5rem;
+}
+
+.page-title {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: .2rem;
+}
+
+.page-desc {
+  font-size: .875rem;
+  color: var(--text-muted);
+}
+
+/* ── 8. CARDS ────────────────────────────────────────────── */
+
+.card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: var(--border-radius-lg);
+  padding: 1.75rem;
+  box-shadow: var(--shadow-sm);
+  transition: background var(--transition), border-color var(--transition);
+}
+
+/* ── 9. FORMULÁRIOS ──────────────────────────────────────── */
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: .4rem;
+  margin-bottom: 1.1rem;
+}
+
+.form-group label {
+  font-size: .82rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  letter-spacing: .05em;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+  background: var(--bg-input);
+  border: 1px solid var(--border-color);
+  border-radius: var(--border-radius);
+  padding: .65rem .9rem;
+  font-family: 'DM Sans', sans-serif;
+  font-size: .95rem;
+  color: var(--text-primary);
+  outline: none;
+  width: 100%;
+  transition: border-color var(--transition), box-shadow var(--transition), background var(--transition);
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+  border-color: var(--color-primary);
+  background: var(--bg-input-focus);
+  box-shadow: var(--shadow-focus);
+}
+
+.form-group input::placeholder,
+.form-group textarea::placeholder {
+  color: var(--text-muted);
+}
+
+.form-group select {
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%238a9ab0' stroke-width='2.5'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right .9rem center;
+  padding-right: 2.2rem;
+  cursor: pointer;
+}
+
+.form-group textarea {
+  resize: vertical;
+  min-height: 90px;
+}
+
+.form-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0 1.25rem;
+}
+
+.form-actions {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 1.25rem;
+}
+
+.divider {
+  border: none;
+  border-top: 1px solid var(--border-color);
+  margin: 1.5rem 0;
+}
+
+.section-title {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: 1.1rem;
+}
+
+/* ── 10. BOTÕES ──────────────────────────────────────────── */
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: .4rem;
+  padding: .6rem 1.4rem;
+  border: none;
+  border-radius: var(--border-radius);
+  font-family: 'DM Sans', sans-serif;
+  font-size: .9rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background var(--transition), transform .12s, box-shadow var(--transition);
+}
+
+.btn:active {
+  transform: scale(.97);
+}
+
+.btn-primary {
+  background: var(--color-primary);
+  color: var(--text-on-primary);
+  box-shadow: 0 2px 8px rgba(26,111,196,.25);
+}
+
+.btn-primary:hover {
+  background: var(--color-primary-hover);
+  box-shadow: 0 4px 14px rgba(26,111,196,.35);
+}
+
+.btn-danger {
+  background: transparent;
+  color: var(--color-danger);
+  border: 1px solid var(--color-danger);
+  padding: .35rem .8rem;
+  font-size: .8rem;
+}
+
+.btn-danger:hover {
+  background: var(--color-danger);
+  color: #fff;
+}
+
+.btn-full {
+  width: 100%;
+  justify-content: center;
+  padding: .75rem;
+  font-size: 1rem;
+}
+
+/* ── 11. LISTA DE PACIENTES ──────────────────────────────── */
+
+.patient-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: .75rem;
+}
+
+.patient-list li {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: .9rem 1.1rem;
+  background: var(--bg-page);
+  border: 1px solid var(--border-color);
+  border-radius: var(--border-radius);
+  font-size: .925rem;
+  transition: border-color var(--transition), background var(--transition);
+  gap: .75rem;
+}
+
+.patient-list li:hover {
+  border-color: var(--color-primary);
+}
+
+.patient-list .patient-info {
+  display: flex;
+  flex-direction: column;
+  gap: .15rem;
+}
+
+.patient-list .patient-name {
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.patient-list .patient-meta {
+  font-size: .78rem;
+  color: var(--text-muted);
+  font-family: 'DM Mono', monospace;
+}
+
+.patient-actions {
+  display: flex;
+  gap: .5rem;
+  flex-shrink: 0;
+}
+
+/* ── 12. HISTÓRICO DE VACINAS ────────────────────────────── */
+
+.vacina-card {
+  border: 1px solid var(--border-color);
+  border-radius: var(--border-radius);
+  padding: 1rem 1.2rem;
+  margin-bottom: .75rem;
+  background: var(--bg-page);
+  transition: border-color var(--transition), background var(--transition);
+}
+
+.vacina-card:hover {
+  border-color: var(--color-primary);
+}
+
+.vacina-card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: .5rem;
+}
+
+.vacina-nome {
+  font-weight: 600;
+  color: var(--text-primary);
+  font-size: .95rem;
+}
+
+.vacina-badge {
+  background: var(--color-primary-light);
+  color: var(--color-primary);
+  font-size: .72rem;
+  font-weight: 600;
+  font-family: 'DM Mono', monospace;
+  padding: .2rem .6rem;
+  border-radius: 99px;
+  letter-spacing: .03em;
+}
+
+.vacina-meta {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+  gap: .3rem .75rem;
+}
+
+.vacina-meta-item {
+  font-size: .8rem;
+  color: var(--text-secondary);
+}
+
+.vacina-meta-item strong {
+  color: var(--text-muted);
+  font-weight: 500;
+  display: block;
+  font-size: .72rem;
+  text-transform: uppercase;
+  letter-spacing: .04em;
+}
+
+.vacina-obs {
+  margin-top: .6rem;
+  font-size: .82rem;
+  color: var(--text-muted);
+  font-style: italic;
+  border-top: 1px solid var(--border-color);
+  padding-top: .5rem;
+}
+
+/* Estado vazio */
+.empty-state {
+  text-align: center;
+  padding: 2.5rem 1rem;
+  color: var(--text-muted);
+  font-size: .9rem;
+}
+
+.empty-state-icon {
+  font-size: 2.5rem;
+  display: block;
+  margin-bottom: .75rem;
+  opacity: .6;
+}
+
+/* ── 13. ANIMAÇÕES ───────────────────────────────────────── */
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(16px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.tela {
+  animation: fadeUp .25s ease both;
+}
+
+/* ── 14. RESPONSIVIDADE ──────────────────────────────────── */
+
+@media (max-width: 640px) {
+  .header {
+    padding: 0 1rem;
+  }
+
+  .header-subtitle {
+    display: none;
+  }
+
+  .nav-inner {
+    padding: .4rem .75rem;
+    gap: .15rem;
+  }
+
+  .nav-btn {
+    padding: .45rem .7rem;
+    font-size: .8rem;
+  }
+
+  .content-wrapper {
+    padding: 1.25rem 1rem 3rem;
+  }
+
+  .card {
+    padding: 1.25rem 1rem;
+  }
+
+  .form-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .login-card {
+    padding: 2rem 1.25rem;
+  }
+
+  .patient-list li {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .patient-actions {
+    width: 100%;
+    justify-content: flex-end;
+  }
 }
