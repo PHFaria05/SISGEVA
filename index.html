@@ -1,70 +1,184 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-br" data-theme="light">
+
 <head>
   <meta charset="UTF-8">
-  <title>SISGEVA</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SISGEVA — Sistema de Gerenciamento de Vacinação</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/style.css">
 </head>
+
 <body>
 
-  <header>
-  <h1>SISGEVA</h1>
-  <button onclick="toggleTheme()">🌙 Tema</button>
+  <!-- HEADER -->
+  <header class="header">
+    <div class="header-brand">
+      <span class="header-icon">💉</span>
+      <div>
+        <h1 class="header-title">SISGEVA</h1>
+        <p class="header-subtitle">Sistema de Gerenciamento de Vacinação</p>
+      </div>
+    </div>
+    <button class="btn-theme" onclick="toggleTheme()" aria-label="Alternar tema">
+      <span class="theme-icon-light">☀️</span>
+      <span class="theme-icon-dark">🌙</span>
+    </button>
   </header>
 
-  <!-- LOGIN -->
-  <div id="login">
-    <h2>Login</h2>
-    <input type="text" id="user" placeholder="Usuário">
-    <input type="password" id="pass" placeholder="Senha">
-    <button onclick="login()">Entrar</button>
-  </div>
+  <!-- TELA DE LOGIN -->
+  <main id="login" class="login-wrapper">
+    <div class="login-card">
+      <div class="login-header">
+        <span class="login-icon">🔐</span>
+        <h2 class="login-title">Acesso ao Sistema</h2>
+        <p class="login-desc">Insira suas credenciais para continuar</p>
+      </div>
 
-  <!-- SISTEMA -->
+      <div class="form-group">
+        <label for="user">Usuário</label>
+        <input type="text" id="user" placeholder="Digite seu usuário" autocomplete="username">
+      </div>
+
+      <div class="form-group">
+        <label for="pass">Senha</label>
+        <input type="password" id="pass" placeholder="Digite sua senha" autocomplete="current-password">
+      </div>
+
+      <div id="login-error" class="login-error" role="alert" aria-live="polite"></div>
+
+      <button class="btn btn-primary btn-full" onclick="login()">Entrar</button>
+    </div>
+  </main>
+
+  <!-- SISTEMA PRINCIPAL -->
   <div id="sistema" style="display:none;">
 
-    <!-- MENU -->
-    <div id="menu">
-      <button onclick="mostrarTela('cadastroPaciente')">Cadastrar Paciente</button>
-      <button onclick="mostrarTela('listaPaciente')">Ver Pacientes</button>
-      <button onclick="mostrarTela('vacinas')">Vacinas</button>
-    </div>
+    <!-- MENU DE NAVEGAÇÃO -->
+    <nav class="nav">
+      <div class="nav-inner">
+        <button class="nav-btn active" onclick="navegarPara('cadastroPaciente', this)">
+          <span>👤</span> Cadastrar Paciente
+        </button>
+        <button class="nav-btn" onclick="navegarPara('listaPaciente', this)">
+          <span>📋</span> Pacientes
+        </button>
+        <button class="nav-btn" onclick="navegarPara('vacinas', this)">
+          <span>💉</span> Vacinas
+        </button>
+        <button class="nav-btn nav-btn-logout" onclick="logout()">
+          <span>🚪</span> Sair
+        </button>
+      </div>
+    </nav>
 
-    <!-- TELA 1 -->
-    <div id="cadastroPaciente" class="tela">
-      <h2>Cadastro de Paciente</h2>
-      <input type="text" id="nome" placeholder="Nome">
-      <input type="number" id="idade" placeholder="Idade">
-      <button onclick="cadastrarPaciente()">Cadastrar</button>
-    </div>
+    <div class="content-wrapper">
 
-    <!-- TELA 2 -->
-    <div id="listaPaciente" class="tela">
-      <h2>Pacientes</h2>
-      <ul id="listaPacientes"></ul>
-    </div>
+      <!-- TELA 1 — CADASTRO DE PACIENTE -->
+      <section id="cadastroPaciente" class="tela">
+        <div class="page-header">
+          <h2 class="page-title">Cadastrar Paciente</h2>
+          <p class="page-desc">Preencha os dados do novo paciente</p>
+        </div>
 
-    <!-- TELA 3 -->
-    <div id="vacinas" class="tela">
-      <h2>Vacinas</h2>
+        <div class="card">
+          <div class="form-grid">
+            <div class="form-group">
+              <label for="nome">Nome completo</label>
+              <input type="text" id="nome" placeholder="Ex: Maria da Silva">
+            </div>
+            <div class="form-group">
+              <label for="idade">Idade</label>
+              <input type="number" id="idade" placeholder="Ex: 32" min="0" max="150">
+            </div>
+          </div>
+          <div class="form-actions">
+            <button class="btn btn-primary" onclick="cadastrarPaciente()">
+              ✅ Cadastrar Paciente
+            </button>
+          </div>
+        </div>
+      </section>
 
-      <select id="pacienteSelect" onchange="verVacina(this.value)"></select>
-      <input type="text" id="vacinaNome" placeholder="Nome da vacina">
-      <input type="text" id="dose" placeholder="Dose (ex: 1ª dose)">
-      <input type="date" id="dataVacina">
-      <input type="text" id="profissional" placeholder="Profissional">
-      <input type="text" id="lote" placeholder="Lote da vacina">
-      <textarea id="observacoes" placeholder="Observações (opcional)"></textarea>
+      <!-- TELA 2 — LISTA DE PACIENTES -->
+      <section id="listaPaciente" class="tela">
+        <div class="page-header">
+          <h2 class="page-title">Pacientes Cadastrados</h2>
+          <p class="page-desc">Gerencie os pacientes do sistema</p>
+        </div>
 
-      <button onclick="aplicarVacina()">Aplicar</button>
+        <div class="card">
+          <ul id="listaPacientes" class="patient-list"></ul>
+        </div>
+      </section>
 
-      <h3>Histórico</h3>
-      <div id="areaVacinas"></div>
-    </div>
+      <!-- TELA 3 — VACINAS -->
+      <section id="vacinas" class="tela">
+        <div class="page-header">
+          <h2 class="page-title">Registro de Vacinas</h2>
+          <p class="page-desc">Aplique e consulte o histórico de vacinação</p>
+        </div>
 
-  </div>
+        <div class="card">
+          <div class="form-group">
+            <label for="pacienteSelect">Paciente</label>
+            <select id="pacienteSelect" onchange="verVacinas(this.value)">
+              <option value="">Selecione um paciente...</option>
+            </select>
+          </div>
 
-  <!--Ordem dos scripts (ui sempre por ultimo)-->
+          <hr class="divider">
+
+          <h3 class="section-title">💉 Aplicar Nova Vacina</h3>
+
+          <div class="form-grid">
+            <div class="form-group">
+              <label for="vacinaNome">Nome da vacina</label>
+              <input type="text" id="vacinaNome" placeholder="Ex: Influenza">
+            </div>
+            <div class="form-group">
+              <label for="dose">Dose</label>
+              <input type="text" id="dose" placeholder="Ex: 1ª dose">
+            </div>
+            <div class="form-group">
+              <label for="dataVacina">Data de aplicação</label>
+              <input type="date" id="dataVacina">
+            </div>
+            <div class="form-group">
+              <label for="profissional">Profissional responsável</label>
+              <input type="text" id="profissional" placeholder="Ex: Dr. João">
+            </div>
+            <div class="form-group">
+              <label for="lote">Lote da vacina</label>
+              <input type="text" id="lote" placeholder="Ex: ABC1234">
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="observacoes">Observações</label>
+            <textarea id="observacoes" rows="3" placeholder="Observações adicionais (opcional)"></textarea>
+          </div>
+
+          <div class="form-actions">
+            <button class="btn btn-primary" onclick="aplicarVacina()">
+              💉 Aplicar Vacina
+            </button>
+          </div>
+        </div>
+
+        <!-- HISTÓRICO -->
+        <div class="card" style="margin-top: 1.5rem;">
+          <h3 class="section-title">📊 Histórico de Vacinação</h3>
+          <div id="areaVacinas"></div>
+        </div>
+      </section>
+
+    </div><!-- /content-wrapper -->
+  </div><!-- /sistema -->
+
+  <!-- SCRIPTS (ordem importa!) -->
   <script src="js/storage.js"></script>
   <script src="js/auth.js"></script>
   <script src="js/pacientes.js"></script>
@@ -73,6 +187,51 @@
 
   <script>
     initStorage();
+
+    // Navegação com destaque no botão ativo
+    function navegarPara(tela, btn) {
+      document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+      if (btn) btn.classList.add('active');
+      mostrarTela(tela);
+    }
+
+    // Logout simples
+    function logout() {
+      document.getElementById('sistema').style.display = 'none';
+      document.getElementById('login').style.display = 'flex';
+      document.getElementById('user').value = '';
+      document.getElementById('pass').value = '';
+    }
+
+    // Feedback de erro no login (substitui o alert)
+    const _login = login;
+    function login() {
+      const user = document.getElementById("user").value;
+      const pass = document.getElementById("pass").value;
+      const errorEl = document.getElementById("login-error");
+
+      if (user === "admin" && pass === "123") {
+        errorEl.textContent = "";
+        document.getElementById("login").style.display = "none";
+        document.getElementById("sistema").style.display = "block";
+        mostrarTela("listaPaciente");
+      } else {
+        errorEl.textContent = "⚠️ Usuário ou senha inválidos.";
+      }
+    }
+
+    // Tema: usar data-theme no <html> em vez de classe .dark
+    function toggleTheme() {
+      const html = document.documentElement;
+      const isDark = html.getAttribute('data-theme') === 'dark';
+      html.setAttribute('data-theme', isDark ? 'light' : 'dark');
+      localStorage.setItem('theme', isDark ? 'light' : 'dark');
+    }
+
+    window.addEventListener('DOMContentLoaded', () => {
+      const saved = localStorage.getItem('theme') || 'light';
+      document.documentElement.setAttribute('data-theme', saved);
+    });
   </script>
 
 </body>
