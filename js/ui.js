@@ -33,3 +33,16 @@ function irParaVacinas(pacienteId) {
   // mostra as vacinas dele
   verVacinas(pacienteId);
 }
+
+// Tema escuro
+function toggleTheme() {
+  document.body.classList.toggle("dark");
+  localStorage.setItem("theme", document.body.classList.contains("dark") ? "dark" : "light");
+}
+
+// Ao carregar a página, aplica o tema salvo
+window.onload = () => {
+  if (localStorage.getItem("theme") === "dark") {
+    document.body.classList.add("dark");
+  }
+};
