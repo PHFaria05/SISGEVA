@@ -7,12 +7,12 @@
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-  <header>
-    <h1>SISGEVA</h1>
-    <button onclick="toggleTheme()">☀️ / 🌙</button>
   
   <div id="toast"></div>
-  
+
+  <header>
+    <h1>SISGEVA</h1>
+    <button onclick="toggleTheme()">☀️ / 🌙</button>  
   </header>
 
   <!-- TELA INICIAL (LOGIN) -->
@@ -117,6 +117,16 @@
       } else {
         document.getElementById('login-error').textContent = '⚠️ Usuário ou senha inválidos.'
       }
+    }
+
+    function mostrarToast(mensagem) {
+      const toast = document.getElementById('toast');
+      toast.textContent = mensagem;
+      toast.style.display = 'block';
+
+      setTimeout(function() {
+        toast.style.display = 'none';
+      }, 3000);
     }
   </script>
 

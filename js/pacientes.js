@@ -3,7 +3,7 @@ function cadastrarPaciente() {
   const idade = document.getElementById("idade").value;
 
   if (!nome.trim() || !idade) {
-    alert("Preencha todos os campos corretamente");
+    mostrarToast("⚠️ Preencha todos os campos corretamente.");
     return;
   }
 
@@ -16,6 +16,7 @@ function cadastrarPaciente() {
   savePaciente(paciente);
 
   limparCampos();
+  mostrarToast("✅ Paciente cadastrado com sucesso!");
   listarPacientes();
   carregarPacientesSelect();
 }
@@ -59,6 +60,8 @@ function removerPaciente(id) {
   let pacientes = getPacientes();
   pacientes = pacientes.filter(p => p.id !== id);
   localStorage.setItem("pacientes", JSON.stringify(pacientes));
+
+  mostrarToast("🗑️ Paciente removido.")
 
   listarPacientes();
 }

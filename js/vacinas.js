@@ -19,7 +19,7 @@ function aplicarVacina() {
 
   // Proteção, estava dando problema no registro de vacinas. 
   if (!select || !select.value) {
-    alert("Selecione um paciente.");
+    mostrarToast("⚠️ Selecione um paciente.");
     return;
   }
 
@@ -37,13 +37,13 @@ function aplicarVacina() {
   const erro = validarVacina(vacina);
 
   if (erro) {
-    alert(erro);
+    mostrarToast(erro);
     return;
   }
 
   saveVacina(vacina);
 
-  alert("Vacina registrada!");
+  mostrarToast("✅ Vacina registrada com sucesso!")
 
   limparFormularioVacina();
 
@@ -57,7 +57,7 @@ function editarVacina(vacinaId, novoNome, novaData) {
   const index = vacinas.findIndex(v => v.id === vacinaId);
 
   if (index === -1) {
-    alert("Vacina não encontrada");
+    mostrarToast("⚠️ Vacina não encontrada.");
     return;
   }
 
@@ -66,7 +66,7 @@ function editarVacina(vacinaId, novoNome, novaData) {
 
   salvarVacinas(vacinas);
 
-  alert("Vacina editada com sucesso!");
+  mostrarToast("✏️ Vacina atualizada!")
 }
 
 function abrirEdicaoVacina(vacinaId) {
@@ -74,7 +74,7 @@ function abrirEdicaoVacina(vacinaId) {
   const vacina = vacinas.find(v => v.id === vacinaId);
 
   if (!vacina) {
-    alert("Vacina não encontrada");
+    mostrarToast("⚠️ Vacina não encontrada.");
     return;
   }
 
@@ -83,7 +83,7 @@ function abrirEdicaoVacina(vacinaId) {
   const novoProfissional = prompt("Novo profissional:", vacina.profissional);
 
   if (!novoNome || !novaDose || !novoProfissional) {
-    alert("Edição cancelada");
+    mostrarToast("⚠️ Edição cancelada.")
     return;
   }
 
@@ -92,8 +92,7 @@ function abrirEdicaoVacina(vacinaId) {
   vacina.profissional = novoProfissional;
 
   salvarVacinas(vacinas);
-
-  alert("Vacina atualizada!");
+  mostrarToast("✏️ Vacina atualizada!");
 
   // recarrega a lista
   verVacinas(vacina.pacienteId);
