@@ -49,10 +49,45 @@ function editarPaciente(id) {
   const pacientes = getPacientes();
   const paciente = pacientes.find(p => p.id === id);
 
+  // Aqui é para preencher os campo com os dados do paciente
   document.getElementById("nome").value = paciente.nome;
   document.getElementById("idade").value = paciente.idade;
 
-  removerPaciente(id);
+  //Muda o butão de "Cadastrar" para "Salvar"
+  const btn = document.getElementById("btnCadastrar");
+  btn.onclick = function() {
+    salvarEdicaoPaciente(id);
+  }
+
+  // Volta para tela de cadastro
+  mostrarTela("cadastroPaciente");
+}
+
+function salvarEdicaoPaciente(id) {
+  const nome = document.getElementById("nome").value;
+  const idade = document.getElementById("idade").value;
+
+  if (!nome.trim() || !idade) {
+    mostrarToast("⚠️ Preencha todos os campos.");
+    return;
+  }
+
+  let paciente = getPacientes();
+  const index = paciente.findIndex(p => p.id === id);
+  paciente[index].nome = nome;
+  paciente[index].idade = idade;
+  localStorage.setItem("pacientes", JSON.stringify(paciente));
+
+  mostrarToast("✏️ Paciente atualizado!");
+
+  // o botão vola ao normal
+  const btn = document.getElementById("btnCadastrar");
+  btn.textContent = "Cadastrar";
+  btn.onclick = cadastrarPaciente;
+
+  limparCampos();
+  listarPacientes();
+  mostrarTela("listaPaciente");
 }
 
 // Remove
@@ -74,7 +109,7 @@ function limparCampos() {
 
 function verVacinas(pacienteId) {
   const vacinas = getVacinas();
-  const lista = vacinas.filter(v => v.pacienteId === pacienteId);
+  const lista = vacinas.filter(v => v.pacienteId === Number(pacienteId));
 
   const container = document.getElementById("areaVacinas");
   container.innerHTML = "";
