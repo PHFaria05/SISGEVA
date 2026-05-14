@@ -52,3 +52,49 @@ SISGEVA/
     ├── vacinas.js   # Lógica de vacinas
     └── ui.js        # Controle de navegação e tema
 ```
+
+---
+
+## ▶️ Como Executar
+
+1. Clone o repositório:
+
+```
+git clone https://github.com/PHFaria05/SISGEVA.git
+```
+
+2. Abra o arquivo `index.html` no navegador
+
+> Não precisa de servidor, instalação ou internet. Funciona direto no navegador!
+
+---
+
+## 🔐 Acesso ao Sistema
+
+| Campo | Valor |
+|-------|-------|
+| Usuário | `admin` |
+| Senha | `123` |
+
+---
+
+## 📈 Melhorias Futuras
+
+- [ ] Modal para edição de vacinas (substituir o `prompt()`)
+- [ ] Sistema de autenticação real com banco de dados
+- [ ] Responsividade completa para mobile
+- [ ] Relatórios de vacinação em PDF
+- [ ] Múltiplos usuários com níveis de acesso
+
+---
+
+## 👨‍💻 Autor
+
+**Pedro Faria**  
+Ciência da Computação — Universidade Nove de Julho  
+
+[![GitHub](https://img.shields.io/badge/GitHub-PHFaria05-181717?style=flat&logo=github)](https://github.com/PHFaria05)
+
+---
+
+> Projeto desenvolvido para a disciplina de Projeto em Computação Aplicada — 2025
