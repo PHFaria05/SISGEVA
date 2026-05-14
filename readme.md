@@ -5,4 +5,50 @@
 ![CSS3](https://img.shields.io/badge/CSS3-1572B6?style=flat&logo=css3&logoColor=white)
 ![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?style=flat&logo=javascript&logoColor=black)
 
-> Sistema web para controle de pacientes e registro de vacinas, desenvolvido como projeto da disciplina de Desenvolvimento de Software na Universidade Nove de Julho.
+> Sistema web para controle de pacientes e registro de vacinas, desenvolvido como projeto da disciplina de Projeto em Computação Aplicada na Universidade Nove de Julho.
+
+## 📌 Sobre o Projeto
+
+O SISGEVA é um sistema web desenvolvido para simular o controle de vacinação em postos de saúde. Permite cadastrar pacientes, registrar vacinas aplicadas e consultar o histórico de vacinação, tudo sem necessidade de internet ou servidor — os dados são armazenados localmente no navegador.
+
+**Desenvolvido por:** Pedro Faria  
+**Curso:** Ciência da Computação — Universidade Nove de Julho  
+**Tipo:** Projeto Individual  
+
+---
+
+## 🚀 Funcionalidades
+
+- 🔐 Login com validação de credenciais
+- 👤 Cadastro, edição e exclusão de pacientes
+- 💉 Registro de vacinas com dose, data, lote e profissional responsável
+- 📊 Histórico de vacinação por paciente
+- 🌙 Tema claro/escuro com preferência salva
+- ✅ Feedback visual em todas as ações (sem alerts do navegador)
+- 🔄 Navegação entre telas sem recarregar a página
+
+---
+
+## 🛠️ Tecnologias Utilizadas
+
+- **HTML5** — estrutura semântica das telas
+- **CSS3** — estilização com variáveis de tema claro/escuro
+- **JavaScript Vanilla** — lógica do sistema sem frameworks
+- **LocalStorage** — armazenamento dos dados no navegador
+
+---
+
+## 📂 Estrutura do Projeto
+
+```
+SISGEVA/
+├── index.html
+├── css/
+│   └── style.css
+└── js/
+    ├── storage.js   # Gerenciamento de dados (LocalStorage)
+    ├── auth.js      # Autenticação
+    ├── pacientes.js # Lógica de pacientes
+    ├── vacinas.js   # Lógica de vacinas
+    └── ui.js        # Controle de navegação e tema
+```
